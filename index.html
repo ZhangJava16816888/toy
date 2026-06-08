@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>深蓝立方 | 耗材 玩具 定制产品 打印机配件</title>
+    <title>深蓝立方 | 耗材 玩具 定制产品 3D打印配件</title>
     <meta
       name="description"
-      content="深蓝立方提供3D打印耗材、玩具、定制产品和打印机配件，支持小批量生产与来图来样定制。"
+      content="深蓝立方提供3D打印耗材、关节人偶、解压玩具、收纳、定制产品和3D打印配件，支持小批量生产与来图来样定制。"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -36,12 +36,14 @@
       <aside class="side-menu" aria-label="页面目录">
         <p class="side-menu-title">产品目录</p>
         <nav>
-          <a href="#top">首页介绍</a>
+          <a href="#toys">玩具细分</a>
+          <a href="#brand-intro">公司介绍</a>
           <a href="#products">产品类型</a>
           <a href="#filament">耗材</a>
-          <a href="#toys">玩具</a>
+          <a href="#joint-dolls">关节人偶</a>
+          <a href="#toys">解压玩具</a>
+          <a href="#printer-accessories">3D打印配件</a>
           <a href="#custom-products">定制产品</a>
-          <a href="#printer-accessories">打印机配件</a>
           <a href="#gallery">产品图片</a>
           <a href="#service">服务优势</a>
           <a href="#contact">联系方式</a>
@@ -54,21 +56,54 @@
       </aside>
 
       <div class="page-content">
-        <section class="hero">
+        <section class="section muted-section top-toy-section" id="toys">
+          <div class="section-header toy-section-header">
+            <p class="eyebrow">玩具细分</p>
+            <h2><span>可做上新、礼品和</span><span>定制开发</span></h2>
+          </div>
+
+          <div class="toy-tabs" role="tablist" aria-label="玩具分类">
+            <button class="active" type="button" data-filter="joint">关节人偶</button>
+            <button type="button" data-filter="stress">解压玩具</button>
+            <button type="button" data-filter="storage">收纳</button>
+            <button type="button" data-filter="accessories">3D打印配件</button>
+          </div>
+
+          <div class="toy-detail" id="joint-dolls" data-toy-detail>
+            <div class="toy-detail-copy">
+              <span class="eyebrow">当前分类</span>
+              <h3>关节人偶</h3>
+              <p>全身精密关节，可自由转动，轻松摆出坐、立、奔跑等百种姿态。换装、搭配道具随你心意，既是精致的桌面艺术品，也是掌中故事的主角。树脂材质细腻雕琢，眼神仿佛藏着情绪，随手把玩或静静欣赏，都能让想象停不下来。</p>
+            </div>
+            <div class="toy-image-grid">
+              <img src="./assets/products/joint-dolls/joint-doll-1.jpg" alt="黑色关节人偶细节展示" />
+              <img src="./assets/products/joint-dolls/joint-doll-2.jpg" alt="圣剑骑士关节人偶" />
+              <img src="./assets/products/joint-dolls/joint-doll-3.jpg" alt="圣剑骑士关节人偶配件展示" />
+              <img src="./assets/products/joint-dolls/joint-doll-4.jpg" alt="黄色侠客关节人偶" />
+              <img src="./assets/products/joint-dolls/joint-doll-5.jpg" alt="银色侠客关节人偶" />
+              <img src="./assets/products/joint-dolls/joint-doll-6.jpg" alt="绿色章鱼战士关节人偶" />
+              <img src="./assets/products/joint-dolls/joint-doll-7.jpg" alt="黑色章鱼战士关节人偶" />
+              <img src="./assets/products/joint-dolls/joint-doll-8.jpg" alt="红色章鱼战士关节人偶" />
+              <img src="./assets/products/joint-dolls/joint-doll-9.jpeg" alt="章鱼战士关节人偶配件展示" />
+            </div>
+          </div>
+        </section>
+
+        <section class="hero" id="brand-intro">
           <div class="hero-copy">
             <p class="eyebrow">3D打印生产与定制服务</p>
             <h1>深蓝立方</h1>
             <p class="lead">
-              承接耗材供应、玩具生产、定制产品开发和打印机配件补货。适合电商上新、工作室打样、礼品定制和长期稳定供货。
+              我们专注制造创意玩具与3D打印生态。主营关节人偶、解压玩具及定制化玩具，兼顾3D打印耗材与打印机配件。从可动人偶的精致关节，到指尖解压的Q弹手感，再到按需定制的个性方案，我们用心打磨每一处细节。源头厂家，支持批发与定制，期待与你合作。
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#contact">联系定制</a>
               <a class="button secondary" href="#gallery">查看产品图</a>
             </div>
           </div>
-          <div class="hero-board" aria-label="产品展示">
+        <div class="hero-board" aria-label="产品展示">
             <img src="assets/products/haocai/a.png" alt="深蓝立方3D打印生产场景" />
-            <img src="./assets/products/figures/b.png" alt="3D打印小人模型" />
+            <img src="./assets/products/joint-dolls/joint-doll-1.jpg" alt="3D打印关节人偶" />
             <img src="./assets/products/haocai/material-spools.png" alt="3D打印耗材展示" />
           </div>
         </section>
@@ -80,14 +115,14 @@
         </a>
         <a href="#toys">
           <strong>玩具</strong>
-          <span>小人、解压、摆件</span>
+          <span>关节人偶、解压、收纳</span>
         </a>
         <a href="#custom-products">
           <strong>定制产品</strong>
           <span>来图、来样、来需求</span>
         </a>
         <a href="#printer-accessories">
-          <strong>打印机配件</strong>
+          <strong>3D打印配件</strong>
           <span>维护替换备用件</span>
         </a>
       </section>
@@ -95,8 +130,8 @@
       <section class="section" id="products">
         <div class="section-header">
           <p class="eyebrow">产品类型</p>
-          <h2>围绕打印农场的四大供应方向</h2>
-          <p>从材料、成品玩具、定制产品到打印机配件，覆盖日常生产和上架销售的主要需求。</p>
+          <h2>围绕深蓝立方的四大供应方向</h2>
+          <p>从材料、成品玩具、定制产品到3D打印配件，覆盖日常生产和上架销售的主要需求。</p>
         </div>
 
         <div class="category-grid">
@@ -109,11 +144,11 @@
             </div>
           </article>
           <article class="category-card featured" id="toy-products">
-            <img src="./assets/products/toys/octopus-2.jpg" alt="3D打印玩具" />
+            <img src="./assets/products/stress-toys/stress-toy-1.png" alt="3D打印解压玩具" />
             <div>
               <span>02</span>
               <h3>玩具</h3>
-              <p>包含小人、解压玩具、桌面摆件以及收纳类玩具产品。</p>
+              <p>包含关节人偶、解压玩具、收纳以及可定制玩具产品。</p>
             </div>
           </article>
           <article class="category-card" id="custom-products">
@@ -125,37 +160,13 @@
             </div>
           </article>
           <article class="category-card" id="printer-accessories">
-            <img src="./assets/products/parts/part-1.jpg" alt="打印机配件" />
+            <img src="./assets/products/printing-accessories/accessory-1.jpg" alt="3D打印配件" />
             <div>
               <span>04</span>
-              <h3>打印机配件</h3>
-              <p>用于打印机日常维护、损耗替换和小批量备用件准备。</p>
+              <h3>3D打印配件</h3>
+              <p>涵盖喷头、加热组件、风扇等核心部件，适合维护、升级和备用件准备。</p>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section class="section muted-section" id="toys">
-        <div class="section-header">
-          <p class="eyebrow">玩具细分</p>
-          <h2>可做上新、礼品和定制开发</h2>
-        </div>
-
-        <div class="toy-tabs" role="tablist" aria-label="玩具分类">
-          <button class="active" type="button" data-filter="figure">小人</button>
-          <button type="button" data-filter="stress">解压玩具</button>
-          <button type="button" data-filter="custom">定制产品</button>
-          <button type="button" data-filter="desktop">桌面摆件</button>
-          <button type="button" data-filter="storage">收纳</button>
-        </div>
-
-        <div class="toy-detail" data-toy-detail>
-          <img src="./assets/products/figures/b.png" alt="3D打印小人" />
-          <div>
-            <span class="eyebrow">当前分类</span>
-            <h3>小人</h3>
-            <p>适合角色模型、主题摆件、盲盒风格产品和小批量上新。</p>
-          </div>
         </div>
       </section>
 
@@ -163,7 +174,7 @@
         <div class="section-header">
           <p class="eyebrow">产品图片</p>
           <h2>实物图片直接展示</h2>
-          <p>页面已使用你提供的产品图，围绕耗材、玩具、定制产品和打印机配件展示。</p>
+          <p>页面已使用你提供的产品图，围绕耗材、玩具、定制产品和3D打印配件展示。</p>
         </div>
 
         <div class="gallery-grid">
@@ -173,19 +184,19 @@
           </article>
           <article>
             <img src="assets/products/haocai/a.png" alt="深蓝立方3D打印设备与耗材" />
-            <h3>打印农场场景</h3>
+            <h3>深蓝立方场景</h3>
           </article>
           <article>
             <img src="./assets/products/haocai/applications-lab.png" alt="3D打印件展示" />
             <h3>3D打印件</h3>
           </article>
           <article>
-            <img src="./assets/products/toys/octopus-1.jpg" alt="章鱼解压玩具" />
-            <h3>章鱼解压玩具</h3>
+            <img src="./assets/products/stress-toys/stress-toy-1.png" alt="解压玩具" />
+            <h3>解压玩具</h3>
           </article>
           <article>
-            <img src="./assets/products/figures/devil-1.jpg" alt="恶魔小人模型" />
-            <h3>小人模型</h3>
+            <img src="./assets/products/joint-dolls/joint-doll-2.jpg" alt="关节人偶" />
+            <h3>关节人偶</h3>
           </article>
           <article>
             <img src="./assets/products/custom-toy.jpg" alt="定制产品" />
@@ -196,12 +207,12 @@
             <h3>桌面摆件</h3>
           </article>
           <article>
-            <img src="./assets/products/storage-main.jpg" alt="收纳产品" />
-            <h3>收纳产品</h3>
+            <img src="./assets/products/storage-tools/storage-tool-1.png" alt="收纳" />
+            <h3>收纳</h3>
           </article>
           <article>
-            <img src="./assets/products/parts/part-2.jpg" alt="打印机配件" />
-            <h3>打印机配件</h3>
+            <img src="./assets/products/printing-accessories/accessory-2.jpg" alt="3D打印配件" />
+            <h3>3D打印配件</h3>
           </article>
         </div>
       </section>
@@ -211,14 +222,14 @@
           <p class="eyebrow">服务优势</p>
           <h2>适合小批量、快打样、持续补货</h2>
           <p>
-            可根据图片、样品、尺寸或使用场景沟通生产方案。页面内容已全部改为中文，方便直接作为宣传页继续完善。
+            源头厂家，支持批发与定制。可根据图片、样品、尺寸或使用场景沟通生产方案，覆盖创意玩具、3D打印耗材与打印机配件。
           </p>
         </div>
         <div class="service-list">
           <span>来图定制</span>
           <span>小批量生产</span>
           <span>多品类上新</span>
-          <span>打印农场供货</span>
+          <span>源头厂家供货</span>
           <span>耗材与配件配套</span>
         </div>
       </section>
@@ -231,7 +242,7 @@
           <span class="brand-mark" aria-hidden="true">3D</span>
           <span>深蓝立方</span>
         </a>
-        <p>3D打印耗材、玩具、定制产品和打印机配件供应。</p>
+        <p>创意玩具、3D打印耗材、定制产品和3D打印配件供应。</p>
       </div>
       <div class="contact-card">
         <span>邮箱</span>
