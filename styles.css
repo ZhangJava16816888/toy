@@ -124,6 +124,111 @@ button {
   background: currentColor;
 }
 
+.page-shell {
+  display: grid;
+  width: min(1440px, 100%);
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 0;
+  margin: 0 auto;
+}
+
+.side-menu {
+  position: sticky;
+  top: 67px;
+  align-self: start;
+  height: calc(100svh - 67px);
+  border-right: 1px solid var(--line);
+  background: #fff;
+  padding: 24px 18px;
+  overflow: auto;
+}
+
+.side-menu-title {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.side-menu nav {
+  display: grid;
+  gap: 6px;
+}
+
+.side-menu a {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  border-radius: 7px;
+  padding: 0 12px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.side-menu a:hover,
+.side-menu a:focus-visible {
+  background: #eef8f1;
+  color: var(--green-dark);
+  outline: none;
+}
+
+.side-contact {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  border: 1px solid rgba(31, 138, 91, 0.24);
+  border-radius: var(--radius);
+  background: #eef8f1;
+  padding: 16px;
+}
+
+.side-contact span {
+  color: var(--green-dark);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.side-contact a {
+  display: grid;
+  min-height: 54px;
+  align-content: center;
+  gap: 2px;
+  border: 1px solid rgba(31, 138, 91, 0.16);
+  border-radius: 7px;
+  background: #fff;
+  padding: 8px 10px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.side-contact a:hover,
+.side-contact a:focus-visible {
+  background: #f8fffa;
+  color: var(--green-dark);
+}
+
+.side-contact a::before {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.side-contact a[href^="mailto"]::before {
+  content: "邮箱";
+}
+
+.side-contact a[href^="tel"]::before {
+  content: "手机号";
+}
+
+.page-content {
+  min-width: 0;
+}
+
 .hero {
   display: grid;
   min-height: calc(100svh - 67px);
@@ -308,7 +413,10 @@ h1 {
 .category-card,
 .muted-section,
 .gallery-section,
-.service-section {
+.service-section,
+.hero,
+.quick-strip,
+.site-footer {
   scroll-margin-top: 92px;
 }
 
@@ -525,6 +633,64 @@ h1 {
     justify-content: flex-start;
   }
 
+  .page-shell {
+    display: block;
+  }
+
+  .side-menu {
+    position: sticky;
+    top: 67px;
+    z-index: 12;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 14px;
+  }
+
+  .side-menu-title {
+    display: none;
+  }
+
+  .side-menu nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .side-menu nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .side-menu a {
+    min-height: 38px;
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 0 12px;
+    white-space: nowrap;
+  }
+
+  .side-contact {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px 12px;
+  }
+
+  .side-contact span {
+    grid-column: 1 / -1;
+  }
+
+  .side-contact a {
+    min-height: 52px;
+    border: 1px solid rgba(31, 138, 91, 0.16);
+    background: #fff;
+    padding: 8px 10px;
+    white-space: normal;
+  }
+
   .hero,
   .toy-detail,
   .service-section,
@@ -609,6 +775,10 @@ h1 {
   }
 
   .quick-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .side-contact {
     grid-template-columns: 1fr;
   }
 
