@@ -231,10 +231,23 @@ h1 {
   overflow: hidden;
 }
 
-.quick-strip div {
+.quick-strip a {
+  display: block;
   min-height: 104px;
   padding: 20px;
   background: #fff;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.quick-strip a:hover,
+.quick-strip a:focus-visible {
+  background: #eef8f1;
+  color: var(--green-dark);
+  outline: none;
+  transform: translateY(-1px);
 }
 
 .quick-strip strong {
@@ -290,6 +303,13 @@ h1 {
   border-radius: var(--radius);
   background: #fff;
   overflow: hidden;
+}
+
+.category-card,
+.muted-section,
+.gallery-section,
+.service-section {
+  scroll-margin-top: 92px;
 }
 
 .category-card img {
