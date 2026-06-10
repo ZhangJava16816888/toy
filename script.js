@@ -1,4 +1,5 @@
 const filterButtons = document.querySelectorAll("[data-filter]");
+const menuFilterLinks = document.querySelectorAll("[data-menu-filter]");
 const toyDetail = document.querySelector("[data-toy-detail]");
 
 const toyItems = {
@@ -98,9 +99,27 @@ function renderToy(key) {
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    filterButtons.forEach((item) => {
-      item.classList.toggle("active", item === button);
+    setActiveFilter(button.dataset.filter);
+  });
+});
+
+function setActiveFilter(key) {
+  if (!toyItems[key]) return;
+
+  filterButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.filter === key);
+  });
+  renderToy(key);
+}
+
+menuFilterLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const key = link.dataset.menuFilter;
+    setActiveFilter(key);
+    document.querySelector("#toys")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
-    renderToy(button.dataset.filter);
   });
 });
