@@ -195,3 +195,120 @@ window.addEventListener("scroll", () => {
 });
 
 updateActiveMenuFromScroll();
+
+function initMatrixRain() {
+  const canvas = document.getElementById("matrix-rain");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext?.("2d");
+  if (!ctx) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const characters = "HC3D";
+  let width = 0;
+  let height = 0;
+  let fontSize = 16;
+  let columns = 0;
+  let drops = [];
+  let leftRainEdge = 0;
+  let rightRainEdge = 0;
+  let animationFrameId = null;
+  let frame = 0;
+
+  function getCharacter(position) {
+    return characters[((position % characters.length) + characters.length) % characters.length];
+  }
+
+  function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    fontSize = width < 720 ? 14 : 16;
+    columns = Math.ceil(width / fontSize);
+    const contentWidth = Math.min(1440, width);
+    const outerSpace = Math.max(0, (width - contentWidth) / 2);
+    const sideWidth =
+      width > 980 ? Math.max(120, outerSpace) : Math.max(42, width * 0.12);
+    leftRainEdge = sideWidth;
+    rightRainEdge = width - sideWidth;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    canvas.dataset.ready = "true";
+    canvas.dataset.columns = String(columns);
+    canvas.dataset.leftRainEdge = String(Math.round(leftRainEdge));
+    canvas.dataset.rightRainEdge = String(Math.round(rightRainEdge));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
+    ctx.textBaseline = "top";
+    drops = Array.from({ length: columns }, () => Math.floor((Math.random() * -height) / fontSize));
+  }
+
+  function drawMatrixRain() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.18)";
+    ctx.fillRect(0, 0, width, height);
+    ctx.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
+
+    drops.forEach((drop, index) => {
+      const x = index * fontSize;
+      if (x > leftRainEdge && x < rightRainEdge) {
+        return;
+      }
+
+      const y = drop * fontSize;
+      const isLead = Math.random() > 0.975;
+      const trailLength = width < 720 ? 5 : 7;
+
+      for (let trail = 0; trail < trailLength; trail += 1) {
+        const trailY = y - trail * fontSize;
+        if (trailY < -fontSize || trailY > height + fontSize) continue;
+
+        const char = getCharacter(drop - trail + index);
+        const alpha = Math.max(0, 0.58 - trail * 0.075);
+        ctx.fillStyle =
+          trail === 0 && isLead
+            ? "rgba(225, 255, 236, 0.92)"
+            : `rgba(0, 255, 128, ${alpha})`;
+        ctx.shadowColor = "rgba(0, 255, 128, 0.7)";
+        ctx.shadowBlur = trail === 0 ? 10 : 3;
+        ctx.fillText(char, x, trailY);
+      }
+      ctx.shadowBlur = 0;
+
+      if (y > height && Math.random() > 0.965) {
+        drops[index] = 0;
+      } else {
+        drops[index] += 1;
+      }
+    });
+  }
+
+  function animateMatrixRain() {
+    frame += 1;
+    if (frame % 2 === 0) {
+      drawMatrixRain();
+    }
+    animationFrameId = window.requestAnimationFrame(animateMatrixRain);
+  }
+
+  resizeCanvas();
+  drawMatrixRain();
+
+  if (!reducedMotion) {
+    animateMatrixRain();
+  }
+
+  window.addEventListener("resize", () => {
+    if (animationFrameId) {
+      window.cancelAnimationFrame(animationFrameId);
+    }
+    resizeCanvas();
+    drawMatrixRain();
+    if (!reducedMotion) {
+      animateMatrixRain();
+    }
+  });
+}
+
+initMatrixRain();
