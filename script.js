@@ -240,14 +240,16 @@ function initMatrixRain() {
     canvas.dataset.leftRainEdge = String(Math.round(leftRainEdge));
     canvas.dataset.rightRainEdge = String(Math.round(rightRainEdge));
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
     ctx.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
     ctx.textBaseline = "top";
     drops = Array.from({ length: columns }, () => Math.floor((Math.random() * -height) / fontSize));
   }
 
   function drawMatrixRain() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.18)";
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.12)";
+    ctx.fillRect(0, 0, leftRainEdge, height);
+    ctx.fillRect(rightRainEdge, 0, width - rightRainEdge, height);
     ctx.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
 
     drops.forEach((drop, index) => {
@@ -276,7 +278,7 @@ function initMatrixRain() {
       }
       ctx.shadowBlur = 0;
 
-      if (y > height && Math.random() > 0.965) {
+      if (y > height && Math.random() > 0.985) {
         drops[index] = 0;
       } else {
         drops[index] += 1;
@@ -286,7 +288,7 @@ function initMatrixRain() {
 
   function animateMatrixRain() {
     frame += 1;
-    if (frame % 2 === 0) {
+    if (frame % 4 === 0) {
       drawMatrixRain();
     }
     animationFrameId = window.requestAnimationFrame(animateMatrixRain);
