@@ -1,6 +1,3 @@
-const header = document.querySelector("[data-header]");
-const navToggle = document.querySelector("[data-nav-toggle]");
-const nav = document.querySelector("[data-nav]");
 const filterButtons = document.querySelectorAll("[data-filter]");
 const toyDetail = document.querySelector("[data-toy-detail]");
 
@@ -79,21 +76,6 @@ const toyItems = {
   },
 };
 
-function closeNav() {
-  if (!header || !navToggle) return;
-  header.classList.remove("is-open");
-  navToggle.setAttribute("aria-expanded", "false");
-  navToggle.setAttribute("aria-label", "打开菜单");
-}
-
-function toggleNav() {
-  if (!header || !navToggle) return;
-  const nextState = !header.classList.contains("is-open");
-  header.classList.toggle("is-open", nextState);
-  navToggle.setAttribute("aria-expanded", String(nextState));
-  navToggle.setAttribute("aria-label", nextState ? "关闭菜单" : "打开菜单");
-}
-
 function renderToy(key) {
   const item = toyItems[key];
   if (!item || !toyDetail) return;
@@ -113,15 +95,6 @@ function renderToy(key) {
     }
   `;
 }
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 980) closeNav();
-});
-
-navToggle?.addEventListener("click", toggleNav);
-nav?.addEventListener("click", (event) => {
-  if (event.target instanceof HTMLAnchorElement) closeNav();
-});
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
