@@ -6,6 +6,7 @@ const toyItems = {
   joint: {
     title: "关节人偶",
     copy: "全身精密关节，可自由转动，轻松摆出坐、立、奔跑等百种姿态。换装、搭配道具随你心意，既是精致的桌面艺术品，也是掌中故事的主角。树脂材质细腻雕琢，眼神仿佛藏着情绪，随手把玩或静静欣赏，都能让想象停不下来。",
+    tags: ["多关节可动", "道具搭配", "适合礼品", "支持批发"],
     images: [
       { src: "./assets/products/joint-dolls/joint-doll-1.jpg", alt: "黑色关节人偶细节展示" },
       { src: "./assets/products/joint-dolls/joint-doll-2.jpg", alt: "圣剑骑士关节人偶" },
@@ -21,6 +22,7 @@ const toyItems = {
   stress: {
     title: "解压玩具",
     copy: "捏、拉、按、揉，指尖的无限小剧场。触感软糯Q弹，声音清脆治愈，无需规则，只有纯粹的重复动作。装在口袋里，通勤或办公时偷偷玩几下，焦虑就被一点点挤走。玩不坏，还会恢复原状，像你的压力一样，轻松揉掉。",
+    tags: ["Q弹手感", "桌面解压", "多款可选", "适合上新"],
     images: [
       { src: "./assets/products/stress-toys/stress-toy-1.png", alt: "解压玩具展示图一" },
       { src: "./assets/products/stress-toys/stress-toy-2.jpg", alt: "猫咪弹簧解压玩具" },
@@ -36,18 +38,21 @@ const toyItems = {
   custom: {
     title: "定制产品",
     copy: "可按图片、样品、尺寸或主题需求沟通，适合活动礼品、展示用品和个性化订单。",
+    tags: ["来图来样", "尺寸定制", "主题开发", "礼品订单"],
     image: "./assets/products/custom-toy.jpg",
     alt: "3D打印定制产品",
   },
   desktop: {
     title: "桌面摆件",
     copy: "适合办公桌、书桌、展示架和礼品场景，可做不同颜色和尺寸。",
+    tags: ["桌面装饰", "多色可选", "礼品摆件", "小批量"],
     image: "./assets/products/desktop-ornament.jpg",
     alt: "3D打印桌面摆件",
   },
   storage: {
     title: "收纳",
     copy: "桌面总是长出杂物？这款收纳自带磁吸开合与可移动隔板。钥匙、数据线、便签纸各归其位，轻轻一推，杂乱隐身。磨砂质感或温润竹木，放玄关、梳妆台或床头，小物件终于有了自己的家。整洁，从随手一放开始。",
+    tags: ["桌面整理", "首饰收纳", "小物分类", "支持定制"],
     images: [
       { src: "./assets/products/storage-tools/storage-tool-1.png", alt: "粉色首饰收纳托盘" },
       { src: "./assets/products/storage-tools/storage-tool-2.png", alt: "电池与配件收纳盒" },
@@ -62,6 +67,7 @@ const toyItems = {
   accessories: {
     title: "3D打印配件",
     copy: "专注高品质3D打印机配件，涵盖喷头、加热组件、风扇等核心部件。耐用精准，提升打印成功率与模型精度。为DIY爱好者和专业用户提供稳定可靠的升级选择。",
+    tags: ["喷头组件", "风扇线束", "维护升级", "稳定备件"],
     images: [
       { src: "./assets/products/printing-accessories/accessory-1.jpg", alt: "3D打印机喷头散热组件" },
       { src: "./assets/products/printing-accessories/accessory-2.jpg", alt: "3D打印机加热组件" },
@@ -86,6 +92,9 @@ function renderToy(key) {
       <span class="eyebrow">当前分类</span>
       <h3>${item.title}</h3>
       <p>${item.copy}</p>
+      <ul class="feature-tags">
+        ${item.tags.map((tag) => `<li>${tag}</li>`).join("")}
+      </ul>
     </div>
     ${
       item.images
