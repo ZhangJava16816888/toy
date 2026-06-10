@@ -1,6 +1,15 @@
 const filterButtons = document.querySelectorAll("[data-filter]");
 const menuFilterLinks = document.querySelectorAll("[data-menu-filter]");
 const toyDetail = document.querySelector("[data-toy-detail]");
+const sideMenuLinks = Array.from(document.querySelectorAll(".side-menu nav a"));
+const trackedSections = Array.from(
+  new Set(sideMenuLinks.map((link) => link.hash).filter(Boolean)),
+)
+  .map((hash) => document.querySelector(hash))
+  .filter(Boolean);
+
+let activeFilterKey = "joint";
+let scrollTicking = false;
 
 const toyItems = {
   joint: {
@@ -99,9 +108,9 @@ function renderToy(key) {
     ${
       item.images
         ? `<div class="toy-image-grid">${item.images
-            .map((image) => `<img src="${image.src}" alt="${image.alt}" />`)
+            .map((image) => `<img src="${image.src}" alt="${image.alt}" loading="lazy" decoding="async" />`)
             .join("")}</div>`
-        : `<img src="${item.image}" alt="${item.alt}" />`
+        : `<img src="${item.image}" alt="${item.alt}" loading="lazy" decoding="async" />`
     }
   `;
 }
@@ -115,10 +124,12 @@ filterButtons.forEach((button) => {
 function setActiveFilter(key) {
   if (!toyItems[key]) return;
 
+  activeFilterKey = key;
   filterButtons.forEach((button) => {
     button.classList.toggle("active", button.dataset.filter === key);
   });
   renderToy(key);
+  setActiveMenu("toys");
 }
 
 menuFilterLinks.forEach((link) => {
@@ -132,3 +143,55 @@ menuFilterLinks.forEach((link) => {
     });
   });
 });
+
+sideMenuLinks.forEach((link) => {
+  if (link.dataset.menuFilter) return;
+
+  link.addEventListener("click", () => {
+    setActiveMenu(link.hash.slice(1));
+  });
+});
+
+function setActiveMenu(sectionId) {
+  sideMenuLinks.forEach((link) => {
+    const linkSection = link.hash.slice(1);
+    const linkFilter = link.dataset.menuFilter;
+    const isActive =
+      sectionId === "toys"
+        ? linkFilter === activeFilterKey
+        : linkSection === sectionId && !linkFilter;
+
+    link.classList.toggle("active", isActive);
+  });
+}
+
+function updateActiveMenuFromScroll() {
+  const offset = 150;
+  let currentSectionId = trackedSections[0]?.id;
+
+  trackedSections.forEach((section) => {
+    if (section.getBoundingClientRect().top <= offset) {
+      currentSectionId = section.id;
+    }
+  });
+
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+    currentSectionId = "contact";
+  }
+
+  if (currentSectionId) {
+    setActiveMenu(currentSectionId);
+  }
+}
+
+window.addEventListener("scroll", () => {
+  if (scrollTicking) return;
+
+  scrollTicking = true;
+  window.requestAnimationFrame(() => {
+    updateActiveMenuFromScroll();
+    scrollTicking = false;
+  });
+});
+
+updateActiveMenuFromScroll();

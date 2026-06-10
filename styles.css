@@ -123,10 +123,15 @@ button {
 }
 
 .side-menu a:hover,
-.side-menu a:focus-visible {
+.side-menu a:focus-visible,
+.side-menu a.active {
   background: #eef8f1;
   color: var(--green-dark);
   outline: none;
+}
+
+.side-menu a.active {
+  box-shadow: inset 3px 0 0 var(--green);
 }
 
 .side-contact {
@@ -440,6 +445,7 @@ h1 {
 .category-card,
 .gallery-grid article,
 .toy-detail,
+.scope-grid article,
 .process-grid article {
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -450,6 +456,7 @@ h1 {
 .category-card,
 .muted-section,
 .gallery-section,
+.scope-section,
 .service-section,
 .process-section,
 .hero,
@@ -594,6 +601,30 @@ h1 {
   margin: 0 auto;
 }
 
+.gallery-groups {
+  display: grid;
+  gap: clamp(28px, 5vw, 48px);
+}
+
+.gallery-group {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.gallery-group-title {
+  margin: 0 0 14px;
+  color: var(--green-dark);
+  font-size: 1.15rem;
+}
+
+.gallery-group .gallery-grid {
+  width: 100%;
+}
+
+.gallery-grid-compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .gallery-grid article {
   padding: 12px;
 }
@@ -639,6 +670,41 @@ h1 {
   background: #fff;
   padding: 0 18px;
   font-weight: 900;
+}
+
+.scope-section {
+  background: #f8faf8;
+}
+
+.scope-grid {
+  display: grid;
+  width: min(1180px, 100%);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 auto;
+}
+
+.scope-grid article {
+  padding: 24px;
+}
+
+.scope-grid span {
+  display: inline-flex;
+  margin-bottom: 36px;
+  color: var(--green-dark);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.scope-grid h3 {
+  margin-bottom: 10px;
+  font-size: 1.28rem;
+  line-height: 1.2;
+}
+
+.scope-grid p {
+  margin-bottom: 0;
+  color: var(--muted);
 }
 
 .process-section {
@@ -721,6 +787,10 @@ h1 {
   overflow-wrap: anywhere;
 }
 
+.mobile-contact-bar {
+  display: none;
+}
+
 @media (max-width: 980px) {
   .page-shell {
     display: block;
@@ -760,6 +830,10 @@ h1 {
     white-space: nowrap;
   }
 
+  .side-menu a.active {
+    box-shadow: inset 0 -3px 0 var(--green);
+  }
+
   .side-contact {
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
@@ -780,6 +854,11 @@ h1 {
     white-space: normal;
   }
 
+  .side-contact a[href^="mailto"] {
+    font-size: 0.86rem;
+    white-space: nowrap;
+  }
+
   .hero,
   .toy-detail,
   .service-section,
@@ -788,6 +867,7 @@ h1 {
   }
 
   .footer-contacts,
+  .scope-grid,
   .process-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -817,6 +897,10 @@ h1 {
 }
 
 @media (max-width: 720px) {
+  body {
+    padding-bottom: 74px;
+  }
+
   .hero {
     min-height: auto;
     padding-top: 42px;
@@ -859,6 +943,8 @@ h1 {
 
   .category-grid,
   .gallery-grid,
+  .gallery-grid-compact,
+  .scope-grid,
   .process-grid,
   .footer-contacts,
   .service-list {
@@ -878,6 +964,46 @@ h1 {
   .category-card img {
     height: auto;
     aspect-ratio: 1;
+  }
+
+  .mobile-contact-bar {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    z-index: 40;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    border: 1px solid rgba(31, 138, 91, 0.24);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.96);
+    padding: 8px;
+    box-shadow: 0 14px 34px rgba(31, 47, 42, 0.18);
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-contact-bar a,
+  .mobile-contact-bar span {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .mobile-contact-bar a {
+    background: var(--green);
+    color: #fff;
+  }
+
+  .mobile-contact-bar span {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--green-dark);
   }
 }
 
