@@ -1043,4 +1043,9 @@ h1 {
   .toy-tabs button {
     flex: 1 1 calc(50% - 10px);
   }
+
+  .mobile-contact-bar a,
+  .mobile-contact-bar span {
+    font-size: 0.82rem;
+  }
 }
