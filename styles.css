@@ -434,6 +434,74 @@ h1 {
   font-size: 1.04rem;
 }
 
+.company-section {
+  background: #fff;
+}
+
+.company-layout {
+  display: grid;
+  width: min(1180px, 100%);
+  grid-template-columns: minmax(0, 0.88fr) minmax(460px, 1.12fr);
+  gap: clamp(26px, 5vw, 62px);
+  align-items: center;
+  margin: 0 auto;
+}
+
+.company-copy h2 {
+  margin-bottom: 18px;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.company-copy p {
+  color: var(--muted);
+  font-size: 1.04rem;
+}
+
+.company-pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.company-pill-grid span {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  border: 1px solid rgba(31, 138, 91, 0.2);
+  border-radius: 7px;
+  background: #eef8f1;
+  color: var(--green-dark);
+  padding: 0 14px;
+  font-weight: 900;
+}
+
+.company-media-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.company-media-grid figure {
+  margin: 0;
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.company-media-grid img {
+  width: 100%;
+  aspect-ratio: 523 / 348;
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+.company-media-grid figcaption {
+  margin-top: 10px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
 .category-grid {
   display: grid;
   width: min(1180px, 100%);
@@ -445,6 +513,7 @@ h1 {
 .category-card,
 .gallery-grid article,
 .toy-detail,
+.company-media-grid figure,
 .scope-grid article,
 .process-grid article {
   border: 1px solid var(--line);
@@ -454,6 +523,7 @@ h1 {
 }
 
 .category-card,
+.company-section,
 .muted-section,
 .gallery-section,
 .scope-section,
@@ -625,6 +695,10 @@ h1 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.gallery-grid-wide {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .gallery-grid article {
   padding: 12px;
 }
@@ -636,6 +710,10 @@ h1 {
   background: #fff;
   object-fit: contain;
   padding: 10px;
+}
+
+.gallery-grid-wide img {
+  aspect-ratio: 523 / 348;
 }
 
 .gallery-grid h3 {
@@ -679,7 +757,7 @@ h1 {
 .scope-grid {
   display: grid;
   width: min(1180px, 100%);
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin: 0 auto;
 }
@@ -705,6 +783,15 @@ h1 {
 .scope-grid p {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.scope-note {
+  width: min(1180px, 100%);
+  margin: 18px auto 0;
+  color: var(--green-dark);
+  font-size: 1.08rem;
+  font-weight: 900;
+  text-align: center;
 }
 
 .process-section {
@@ -791,6 +878,12 @@ h1 {
   display: none;
 }
 
+@media (max-width: 1180px) {
+  .company-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 980px) {
   .page-shell {
     display: block;
@@ -860,6 +953,7 @@ h1 {
   }
 
   .hero,
+  .company-layout,
   .toy-detail,
   .service-section,
   .site-footer {
@@ -886,6 +980,7 @@ h1 {
   }
 
   .category-grid,
+  .gallery-grid-wide,
   .gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -944,6 +1039,8 @@ h1 {
   .category-grid,
   .gallery-grid,
   .gallery-grid-compact,
+  .gallery-grid-wide,
+  .company-pill-grid,
   .scope-grid,
   .process-grid,
   .footer-contacts,
