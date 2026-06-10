@@ -9,6 +9,12 @@
   --green-dark: #146943;
   --orange: #e58b2a;
   --blue: #317fb4;
+  --glow-mint: rgba(31, 138, 91, 0.16);
+  --glow-cyan: rgba(49, 127, 180, 0.16);
+  --glow-gold: rgba(229, 139, 42, 0.14);
+  --electric: rgba(31, 231, 201, 0.56);
+  --electric-blue: rgba(50, 145, 255, 0.46);
+  --electric-white: rgba(255, 255, 255, 0.9);
   --shadow: 0 18px 45px rgba(31, 47, 42, 0.12);
   --radius: 8px;
   font-family:
@@ -25,16 +31,51 @@ html {
 }
 
 body {
+  position: relative;
+  overflow-x: hidden;
   margin: 0;
-  background: var(--paper);
+  background:
+    linear-gradient(125deg, rgba(31, 138, 91, 0.05), transparent 34%),
+    linear-gradient(235deg, rgba(49, 127, 180, 0.07), transparent 38%),
+    var(--paper);
   color: var(--ink);
   font-size: 16px;
   line-height: 1.6;
 }
 
+body::before {
+  position: fixed;
+  z-index: 0;
+  inset: -22% -14%;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      transparent 17%,
+      rgba(31, 138, 91, 0.11) 27%,
+      rgba(49, 127, 180, 0.1) 42%,
+      transparent 56%,
+      transparent 68%,
+      rgba(229, 139, 42, 0.08) 78%,
+      transparent 90%
+    ),
+    repeating-linear-gradient(90deg, rgba(31, 138, 91, 0.04) 0 1px, transparent 1px 76px),
+    repeating-linear-gradient(0deg, rgba(49, 127, 180, 0.035) 0 1px, transparent 1px 76px);
+  background-position: 0% 50%, 0 0, 0 0;
+  background-size: 180% 180%, 76px 76px, 76px 76px;
+  opacity: 0.8;
+  animation: pageGlowDrift 18s ease-in-out infinite alternate;
+}
+
 img {
   display: block;
   max-width: 100%;
+  transform-origin: center;
+  transition:
+    filter 180ms ease,
+    transform 180ms ease;
 }
 
 a {
@@ -55,9 +96,24 @@ button {
   justify-content: space-between;
   gap: 24px;
   border-bottom: 1px solid rgba(221, 229, 225, 0.8);
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.86);
   padding: 14px clamp(18px, 4vw, 56px);
+  box-shadow: 0 12px 32px rgba(31, 47, 42, 0.05);
   backdrop-filter: blur(14px);
+}
+
+.site-header::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--electric), var(--electric-white), var(--electric-blue), transparent);
+  background-size: 240% 100%;
+  opacity: 0.86;
+  box-shadow: 0 0 18px rgba(31, 231, 201, 0.48);
+  animation: electricRail 3.6s linear infinite;
 }
 
 .brand {
@@ -70,6 +126,8 @@ button {
 }
 
 .brand-mark {
+  position: relative;
+  overflow: hidden;
   display: inline-grid;
   width: 38px;
   height: 38px;
@@ -81,7 +139,18 @@ button {
   font-weight: 900;
 }
 
+.brand-mark::after {
+  position: absolute;
+  inset: -40%;
+  content: "";
+  background: linear-gradient(115deg, transparent 34%, rgba(255, 255, 255, 0.78) 48%, transparent 62%);
+  transform: translateX(-130%);
+  animation: markSheen 4.8s ease-in-out infinite;
+}
+
 .page-shell {
+  position: relative;
+  z-index: 1;
   display: grid;
   width: min(1440px, 100%);
   grid-template-columns: 280px minmax(0, 1fr);
@@ -225,13 +294,53 @@ button {
 }
 
 .hero {
+  position: relative;
+  overflow: hidden;
   display: grid;
   min-height: auto;
   grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
   gap: clamp(28px, 5vw, 70px);
   align-items: center;
   padding: clamp(36px, 5vw, 64px) clamp(18px, 5vw, 72px) clamp(28px, 4vw, 46px);
-  background: linear-gradient(180deg, #fff 0%, #f7faf7 100%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 250, 247, 0.92) 100%),
+    linear-gradient(130deg, rgba(31, 138, 91, 0.08), rgba(49, 127, 180, 0.08), rgba(229, 139, 42, 0.06));
+}
+
+.hero::before,
+.hero::after {
+  position: absolute;
+  pointer-events: none;
+  content: "";
+}
+
+.hero::before {
+  inset: -30% -18%;
+  background:
+    linear-gradient(105deg, transparent 8%, var(--glow-mint) 29%, var(--glow-cyan) 48%, var(--glow-gold) 64%, transparent 84%),
+    linear-gradient(24deg, transparent 20%, rgba(255, 255, 255, 0.54) 49%, transparent 74%);
+  opacity: 0.88;
+  transform: translate3d(-12%, 0, 0);
+  animation: heroLightSweep 11s ease-in-out infinite alternate;
+}
+
+.hero::after {
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(31, 138, 91, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(49, 127, 180, 0.075) 1px, transparent 1px);
+  background-position: 0 0;
+  background-size: 48px 48px;
+  opacity: 0.36;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 74%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 74%, transparent);
+  animation: gridDrift 24s linear infinite;
+}
+
+.hero-copy,
+.hero-board {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-copy {
@@ -260,6 +369,10 @@ h1 {
   line-height: 1.02;
   letter-spacing: 0;
   white-space: nowrap;
+  text-shadow:
+    0 0 0 rgba(31, 231, 201, 0),
+    0 0 0 rgba(50, 145, 255, 0);
+  animation: electricTitlePulse 4.6s ease-in-out infinite;
 }
 
 .lead {
@@ -297,6 +410,8 @@ h1 {
 }
 
 .button {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   min-height: 48px;
   align-items: center;
@@ -304,11 +419,36 @@ h1 {
   border-radius: 7px;
   padding: 0 22px;
   font-weight: 900;
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.button::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.62) 48%, transparent 62%);
+  transform: translateX(-120%);
+  transition: transform 420ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.button:hover::after,
+.button:focus-visible::after {
+  transform: translateX(120%);
 }
 
 .button.primary {
   background: var(--green);
   color: #fff;
+  box-shadow: 0 14px 30px rgba(31, 138, 91, 0.24);
 }
 
 .button.secondary {
@@ -318,10 +458,25 @@ h1 {
 }
 
 .hero-board {
+  position: relative;
   display: grid;
   grid-template-columns: 1.12fr 0.88fr;
   gap: 14px;
   align-items: stretch;
+  isolation: isolate;
+  animation: panelFloat 7.5s ease-in-out infinite;
+}
+
+.hero-board::before {
+  position: absolute;
+  z-index: -1;
+  inset: -14px;
+  border-radius: 14px;
+  content: "";
+  background: conic-gradient(from 110deg, rgba(31, 138, 91, 0.28), rgba(49, 127, 180, 0.26), rgba(229, 139, 42, 0.2), rgba(31, 138, 91, 0.28));
+  filter: blur(18px);
+  opacity: 0.42;
+  animation: boardGlow 9s linear infinite;
 }
 
 .hero-board img {
@@ -334,6 +489,9 @@ h1 {
   object-fit: contain;
   padding: 10px;
   box-shadow: var(--shadow);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .hero-board img:first-child {
@@ -520,6 +678,7 @@ h1 {
 .company-media-grid figure,
 .scope-grid article,
 .process-grid article {
+  position: relative;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #fff;
@@ -834,6 +993,8 @@ h1 {
 }
 
 .site-footer {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.45fr);
   gap: 24px;
@@ -859,7 +1020,7 @@ h1 {
 
 .footer-contacts {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -876,6 +1037,141 @@ h1 {
   font-weight: 900;
   line-height: 1.25;
   overflow-wrap: anywhere;
+}
+
+@media (hover: hover) {
+  img:hover {
+    filter: brightness(1.08) saturate(1.08);
+    transform: scale(1.035);
+  }
+
+  .category-card,
+  .gallery-grid article,
+  .company-media-grid figure,
+  .scope-grid article,
+  .process-grid article {
+    transition:
+      box-shadow 180ms ease,
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .category-card:hover,
+  .gallery-grid article:hover,
+  .company-media-grid figure:hover,
+  .scope-grid article:hover,
+  .process-grid article:hover {
+    border-color: rgba(31, 138, 91, 0.28);
+    box-shadow: 0 20px 42px rgba(31, 47, 42, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .hero-board img:hover {
+    filter: brightness(1.08) saturate(1.08);
+    box-shadow: 0 22px 52px rgba(31, 47, 42, 0.16);
+    transform: translateY(-3px) scale(1.035);
+  }
+}
+
+@keyframes pageGlowDrift {
+  0% {
+    background-position: 0% 46%, 0 0, 0 0;
+    transform: translate3d(-1.5%, -1%, 0);
+  }
+
+  100% {
+    background-position: 100% 54%, 38px 0, 0 38px;
+    transform: translate3d(1.5%, 1%, 0);
+  }
+}
+
+@keyframes heroLightSweep {
+  0% {
+    transform: translate3d(-18%, -2%, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(12%, 2%, 0) scale(1.04);
+  }
+}
+
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 96px 48px, 48px 96px;
+  }
+}
+
+@keyframes panelFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes boardGlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes markSheen {
+  0%,
+  56% {
+    transform: translateX(-130%);
+  }
+
+  78%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes electricRail {
+  0% {
+    background-position: 220% 0;
+  }
+
+  100% {
+    background-position: -220% 0;
+  }
+}
+
+@keyframes electricTitlePulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 0 rgba(31, 231, 201, 0),
+      0 0 0 rgba(50, 145, 255, 0);
+  }
+
+  50% {
+    text-shadow:
+      0 0 18px rgba(31, 231, 201, 0.22),
+      0 0 34px rgba(50, 145, 255, 0.16);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 .mobile-contact-bar {
@@ -1084,8 +1380,7 @@ h1 {
     backdrop-filter: blur(12px);
   }
 
-  .mobile-contact-bar a,
-  .mobile-contact-bar span {
+  .mobile-contact-bar a {
     display: flex;
     min-height: 42px;
     align-items: center;
@@ -1096,12 +1391,12 @@ h1 {
     white-space: nowrap;
   }
 
-  .mobile-contact-bar a {
+  .mobile-contact-bar a:first-child {
     background: var(--green);
     color: #fff;
   }
 
-  .mobile-contact-bar span {
+  .mobile-contact-bar a:last-child {
     border: 1px solid var(--line);
     background: #fff;
     color: var(--green-dark);
@@ -1145,8 +1440,7 @@ h1 {
     flex: 1 1 calc(50% - 10px);
   }
 
-  .mobile-contact-bar a,
-  .mobile-contact-bar span {
+  .mobile-contact-bar a {
     font-size: 0.82rem;
   }
 }
