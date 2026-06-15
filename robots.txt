@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://superhc3d.com/sitemap.xml
