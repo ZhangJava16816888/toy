@@ -1,39 +1,67 @@
-# 深蓝立方宣传页
+# HC 3D Static Website
 
-这个文件夹是一个纯静态网站，可直接作为 3D 打印农场的中文宣传页使用。
+This folder contains a pure static website for HC 3D, a 3D printing product manufacturer.
 
-## 文件
+## Files
 
-- `index.html` - 页面结构与中文内容
-- `styles.css` - 响应式样式
-- `script.js` - 移动端菜单与玩具分类切换
-- `assets/products/` - 产品图片
+- `index.html` - Page structure and English content
+- `styles.css` - Responsive styles
+- `script.js` - Category switching and page interactions
+- `assets/products/` - Product images
 
-## 产品方向
+## Product Directions
 
-- 3D打印耗材
-- 玩具
-  - 小人
-  - 解压玩具
-  - 桌面摆件
-  - 收纳
-- 定制产品
-- 打印机配件
+- 3D printing filament
+- Toys
+  - Articulated figures
+  - Stress toys
+  - Desktop ornaments
+  - Storage
+- Custom products
+- 3D printer parts
 
-## 联系方式
+## Contact
 
-- 邮箱：`libin19881841909@gmail.com`
-- 手机号：`+86-19881841909`
+- Email: `libin19881841909@gmail.com`
+- Phone: `+86-19881841909`
 
-## 静态部署
+## Static Deployment
 
-把整个 `matterforge-site` 文件夹作为站点根目录上传即可。
+Upload the entire `matterforge-site` folder as the site root.
 
-常见设置：
+Common settings:
 
-- Build command：留空
-- Output directory：`.` 或 `/`
-- Entry file：`index.html`
-- Node version：不需要
+- Build command: leave empty
+- Output directory: `.` or `/`
+- Entry file: `index.html`
+- Node version: not required
 
-上传时请保持 `assets` 文件夹与 `index.html` 在同一级目录。
+Keep the `assets` folder and `index.html` in the same directory when uploading.
+
+## Cloudflare Pages
+
+Recommended Cloudflare Pages settings:
+
+- Framework preset: None
+- Build command: leave empty
+- Build output directory: `.`
+- Production branch: `master` or your chosen deployment branch
+- Custom domain: `superhc3d.com`
+
+After the custom domain is active, open these URLs to confirm they return `200`:
+
+- `https://superhc3d.com/`
+- `https://superhc3d.com/robots.txt`
+- `https://superhc3d.com/sitemap.xml`
+
+Use only one public canonical domain for search engines. If Cloudflare also exposes a `*.pages.dev` URL or a `www.superhc3d.com` URL, redirect those versions to `https://superhc3d.com/`.
+
+## Google Indexing
+
+After deployment:
+
+1. Add `superhc3d.com` as a Domain property in Google Search Console.
+2. Verify the domain by adding the TXT record Google provides to Cloudflare DNS.
+3. Submit this sitemap in Search Console: `https://superhc3d.com/sitemap.xml`.
+4. Use URL Inspection for `https://superhc3d.com/` and request indexing.
+5. Keep the page publicly accessible, avoid password protection, and make sure `robots.txt` remains crawlable.

@@ -284,7 +284,7 @@ button {
 }
 
 .side-contact a[href^="mailto"]::before {
-  content: "邮箱";
+  content: "Email";
 }
 
 .side-contact a[href^="mailto"] {
@@ -296,7 +296,7 @@ button {
 }
 
 .side-contact a[href^="tel"]::before {
-  content: "手机号";
+  content: "Phone";
 }
 
 .page-content {
@@ -648,6 +648,16 @@ h1 {
   color: var(--green-dark);
   padding: 0 14px;
   font-weight: 900;
+}
+
+.company-advantage-grid {
+  margin-top: 14px;
+}
+
+.company-advantage-grid span {
+  border-color: rgba(100, 112, 108, 0.18);
+  background: #f7faf7;
+  color: var(--ink);
 }
 
 .company-media-grid {
@@ -1207,6 +1217,7 @@ h1 {
     border-right: 0;
     border-bottom: 1px solid var(--line);
     padding: 10px 14px;
+    overflow: hidden;
   }
 
   .side-menu-title {
@@ -1215,6 +1226,7 @@ h1 {
 
   .side-menu nav {
     display: flex;
+    max-width: 100%;
     gap: 8px;
     overflow-x: auto;
     scrollbar-width: none;
@@ -1317,6 +1329,8 @@ h1 {
 
   .hero-board {
     grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    border-radius: 14px;
   }
 
   .hero-board img,
@@ -1337,6 +1351,13 @@ h1 {
     text-align: left;
   }
 
+  .section-header h2,
+  .service-copy h2,
+  .company-copy h2,
+  .toy-detail h3 {
+    overflow-wrap: break-word;
+  }
+
   .toy-section-header h2 {
     justify-content: flex-start;
     font-size: clamp(2.2rem, 11vw, 3.8rem);
@@ -1344,6 +1365,12 @@ h1 {
 
   .balanced-title {
     justify-content: flex-start;
+  }
+
+  .balanced-title span,
+  .toy-section-header h2 span {
+    max-width: 100%;
+    white-space: normal;
   }
 
   .category-grid,
